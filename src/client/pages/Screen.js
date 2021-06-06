@@ -3,13 +3,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { actionRequestUpdateRocketStatus } from '../redux/actions';
+import { Rocket } from '../components/Rocket';
 
 export const Screen = (props) => {
-  const {index: screenIndex} = props
+  const { index: screenIndex } = props
   const dispatch = useDispatch();
   const rocketIndex = 0;
   const rocketStatus = useSelector(state => state.rocket.status);
-  const onAnimationEnd = () => {
+  const rocketMessage = useSelector(state => state.rocket.message[rocketIndex]);
+  const requestUpdateRocketStatus = () => {
     dispatch(actionRequestUpdateRocketStatus({
       index: rocketIndex,
     }));
@@ -24,10 +26,14 @@ export const Screen = (props) => {
 
   return (<>
     <div
-      onClick={onAnimationEnd}
+      onClick={requestUpdateRocketStatus}
     >homepage</div>
     <div>{rocketStatus[rocketIndex]}</div>
-    <div>{rocketStatus[rocketIndex] === screenIndex ? 'start': 'over'}</div>
+    <div>{rocketStatus[rocketIndex] === screenIndex ? 'start' : 'over'}</div>
+    <Rocket
+      active={rocketStatus[rocketIndex] === screenIndex}
+      onEnd={requestUpdateRocketStatus}
+      message={rocketMessage} />
   </>);
 };
 
