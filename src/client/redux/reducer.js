@@ -21,9 +21,6 @@ export const rootReducer = createReducer(initialState, (builder) => {
       state.ui.isApiLoading = action.payload;
     })
     .addCase(actionLoadRocketStatus, (state, action) => {
-      state.rocket.status[action.payload.index] = action.payload.status;
-      if (action.payload.message) {
-        state.rocket.message[action.payload.index] = action.payload.message;
-      }
+      state.rocket = action.payload;
     });
 });

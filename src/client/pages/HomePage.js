@@ -9,7 +9,6 @@ export const HomePage = () => {
   const onAnimationEnd = () => {
     dispatch(actionRequestUpdateRocketStatus({
       index: rocketIndex,
-      status: rocketStatus[rocketIndex],
     }));
   };
 

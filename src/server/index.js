@@ -12,6 +12,11 @@ app.use(express.json());
 const httpServer = http.createServer(app);
 const socketIoServer = new Server(httpServer);
 app.set('socketIoServer', socketIoServer);
+const rocketInit = {
+  status:[-1,-1,-1,-1,-1],
+  message:['','','','',''],
+}
+app.set('rocket',rocketInit);
 miscRoutes(app);
 httpServer.listen(process.env.PORT || 8080, () => {
   console.log(`Listening on port ${process.env.PORT || 8080}!`);
