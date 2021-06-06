@@ -3,7 +3,7 @@ const http = require('http');
 const { Server } = require("socket.io");
 
 const miscRoutes = require('./api.js');
-const {envConfig} = require('./constants.js');
+const { envConfig } = require('./constants.js');
 
 const app = express();
 app.use(express.static('dist'));
@@ -25,8 +25,8 @@ socketIoServer.on('connection', (socket) => {
   });
 
   socket.on("C2H", (payload) => {
-    socket.emit('H2C', JSON.stringify({screen1:1}));
+    socket.emit('H2C', JSON.stringify({ rocketIndex: 0, statusId: 1 }));
   });
 });
 
-module.exports = {socketIoServer};
+module.exports = { socketIoServer };

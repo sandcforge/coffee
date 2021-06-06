@@ -1,18 +1,29 @@
 import { createReducer } from '@reduxjs/toolkit';
-
-import { APP_CONST, UI_CONST } from '../constants.js';
 import {
-  actionUpdateStatus,
+  actionLoadRocketStatus,
+  actionSetApiLoading,
 } from './actions.js';
 
 const initialState = {
-  status: {},
+  rocket: {
+    status: [-1, -1, -1, -1, -1],
+    message: ['', '', '', '', ''],
+  },
+  ui: {
+    isApiLoading: false,
+  }
 };
 
 
 export const rootReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(actionUpdateStatus, (state, action) => {
-      state.status = action.payload;
+    .addCase(actionSetApiLoading, (state, action) => {
+      state.ui.isApiLoading = action.payload;
+    })
+    .addCase(actionLoadRocketStatus, (state, action) => {
+      state.rocket.status[action.payload.index] = action.payload.status;
+      if (action.payload.message) {
+        state.rocket.message[action.payload.index] = action.payload.message;
+      }
     });
 });

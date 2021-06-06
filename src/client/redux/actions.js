@@ -1,11 +1,10 @@
 import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-import { APP_CONST, UI_CONST } from '../constants.js';
+export const actionSetApiLoading = createAction('SetApiLoading');
+export const actionLoadRocketStatus = createAction('LoadRocketStatus');
 
 
-
-export const actionUpdateStatus = createAction('UpdateStatus');
 
 const asyncActionHelper = (func) => {
   return async (arg, thunkApi) => {
@@ -22,10 +21,10 @@ const asyncActionHelper = (func) => {
   };
 };
 
-export const actionGetProductCategory = createAsyncThunk(
-  'GetProductCategor',
+export const actionRequestUpdateRocketStatus = createAsyncThunk(
+  'RequestUpdateRocketStatus',
   asyncActionHelper(async (arg, thunkApi) => {
-    const result = await axios.post('/api/proxy', { method: 'GET', url: APP_CONST.GOODS_CATEGORY_EP });
-    return result.data.Data;
+    const result = await axios.post('/api/requpdate', arg);
+    return result.data;
   })
 );
