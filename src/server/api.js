@@ -29,6 +29,9 @@ const miscRoutes = (app) => {
     try {
       const rocket = req.app.get('rocket');
       rocket.status[index] = rocket.status[index] + 1;
+      if (rocket.status[index] >= req.app.get('totalStatusNumber')) {
+        rocket.status[index] = -1;
+      }
       req.app.get('socketIoServer').emit('H2C', JSON.stringify(rocket));
       res.json(rocket);
     }

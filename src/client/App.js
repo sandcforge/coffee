@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { WebSocketProvider } from '../client/context/socket.js';
 
-import { HomePage } from './pages/HomePage';
+import { Screen } from './pages/Screen';
 import { AdminPage } from './pages/AdminPage';
 
 export const App = () => {
@@ -19,7 +19,7 @@ export const App = () => {
       <Switch>
         <Route exact path="/">
           <WebSocketProvider>
-            <HomePage />
+            <Screen index={1} />
           </WebSocketProvider>
         </Route>
         <Route path="/admin">
