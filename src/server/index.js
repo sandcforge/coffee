@@ -10,20 +10,23 @@ app.use(express.static('dist'));
 app.use(express.json());
 
 const httpServer = http.createServer(app);
-const io = new Server(httpServer);
-
-
+const socketIoServer = new Server(httpServer);
+app.set('socketIoServer', socketIoServer);
 miscRoutes(app);
 httpServer.listen(process.env.PORT || 8080, () => {
   console.log(`Listening on port ${process.env.PORT || 8080}!`);
   console.log(`NodeEnv: ${envConfig.nodeEnv}`);
 });
 
-io.on('connection', (socket) => {
+socketIoServer.on('connection', (socket) => {
   console.log('a user connected');
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
+
+  socket.on("C2H", (payload) => {
+    socket.emit('H2C', JSON.stringify({screen1:1}));
+  });
 });
 
-
+module.exports = {socketIoServer};

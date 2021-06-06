@@ -200,6 +200,7 @@ export const APP_CONST = {
   GOODS_CATEGORY_EP: `https://www.snailsmall.com/GoodsCategory/FindBigCategory`,
   ACCESS_ROLE_ADMIN: 1,
   ACCESS_ROLE_USER: 2,
+  WS_BASE: 'http://localhost:3000',
 };
 
 export const BUSINESS_CONST = {

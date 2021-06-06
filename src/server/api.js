@@ -6,6 +6,7 @@ const miscRoutes = (app) => {
   app.post('/api/kickoff', async (req, res) => {
     const { message, index } = req.body;
     try {
+      req.app.get('socketIoServer').emit('H2C', JSON.stringify({screen0:1}));
       res.json({ message, index });
     }
     catch (e) {

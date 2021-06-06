@@ -5,6 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { WebSocketProvider } from '../client/context/socket.js';
 
 import { HomePage } from './pages/HomePage';
 import { AdminPage } from './pages/AdminPage';
@@ -17,7 +18,9 @@ export const App = () => {
             renders the first one that matches the current URL. */}
       <Switch>
         <Route exact path="/">
+          <WebSocketProvider>
             <HomePage />
+          </WebSocketProvider>
         </Route>
         <Route path="/admin">
           <AdminPage />
