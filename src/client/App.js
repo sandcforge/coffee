@@ -16,19 +16,28 @@ export const App = () => {
     <Router>
       {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-      <Switch>
-        <Route exact path="/">
-          <WebSocketProvider>
+      <WebSocketProvider>
+        <Switch>
+          <Route exact path="/">
+            <Screen index={0} />
+          </Route>
+          <Route exact path="/1">
             <Screen index={1} />
-          </WebSocketProvider>
-        </Route>
-        <Route path="/admin">
-          <AdminPage />
-        </Route>
-        <Route path="*">
-          <div>找不到页面！</div>
-        </Route>
-      </Switch>
+          </Route>
+          <Route exact path="/2">
+            <Screen index={2} />
+          </Route>
+          <Route exact path="/3">
+            <Screen index={3} />
+          </Route>
+          <Route exact path="/4">
+            <Screen index={4} />
+          </Route>
+          <Route path="*">
+            <div>找不到页面！</div>
+          </Route>
+        </Switch>
+      </WebSocketProvider>
     </Router>
   );
 }
