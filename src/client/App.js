@@ -7,8 +7,8 @@ import {
 } from "react-router-dom";
 import { WebSocketProvider } from '../client/context/socket.js';
 
-import { Screen } from './pages/Screen';
-import { AdminPage } from './pages/AdminPage';
+import { Screen } from './pages/Screen.js';
+import { User } from './pages/User.js';
 
 export const App = () => {
 
@@ -32,6 +32,9 @@ export const App = () => {
           </Route>
           <Route exact path="/4">
             <Screen index={4} />
+          </Route>
+          <Route exact path="/user">
+            <User />
           </Route>
           <Route path="*">
             <div>找不到页面！</div>

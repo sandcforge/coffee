@@ -28,3 +28,11 @@ export const actionRequestUpdateRocketStatus = createAsyncThunk(
     return result.data;
   })
 );
+
+export const actionSubmitMessage = createAsyncThunk(
+  'SubmitMessage',
+  asyncActionHelper(async (arg, thunkApi) => {
+    const result = await axios.post('/api/kickoff', arg);
+    return result.data;
+  })
+);
