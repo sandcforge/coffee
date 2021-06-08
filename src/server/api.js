@@ -33,7 +33,7 @@ const miscRoutes = (app) => {
         rocket.status[index] = -1;
       }
       req.app.get('socketIoServer').emit('H2C', JSON.stringify(rocket));
-      res.json(rocket);
+      return res.json(rocket);
     }
     catch (e) {
       console.log(e);

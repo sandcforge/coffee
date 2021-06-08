@@ -4,11 +4,11 @@ import styled, { keyframes } from 'styled-components';
 const Rocket_ = (props) => {
   const {
     message, // Banner message
-    active,  // 0->1: Start the animation; 0->1: Hide the Rocket
+    active = false,  // 0->1: Start the animation; 0->1: Hide the Rocket
     onEnd,   // The event at the end of animation
     color = 'red', // Rocket color
     iterations = 5,
-    fightDuration = 8, // The time of fight per iteration, unit: sec.
+    fightDuration = 4, // The time of fight per iteration, unit: sec.
   } = props;
 
   const windowWidth = window.innerWidth;
@@ -22,6 +22,8 @@ const Rocket_ = (props) => {
 
   const Wrapper = styled.div`
     background-color: ${color};
+    top: ${props => 300 + props.index * 100}px;
+    left: ${-RocketContainerWidth}px;
     position: absolute;
     height: ${RocketContainerHeight}px;
     width: ${RocketContainerWidth}px;
@@ -32,29 +34,16 @@ const Rocket_ = (props) => {
     animation-delay: ${props => fightDuration * props.index * ratio}s;
  `;
 
-  const ending = keyframes`
-    0% { background-color: white; }
-    100% { background-color: white;}`;
-
-  const Dummy = styled.div`
-    animation-name: ${ending};
-    animation-duration: 0s;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
-    animation-delay: ${props => fightDuration * iterations * ratio}s;
-    `;
-
   return active && (<>
     {Array.from(Array(iterations).keys()).map(i =>
       <Wrapper
         key={i}
         index={i}
+        onAnimationEnd={i == iterations - 1 ? onEnd : undefined}
       >
         {message}
       </Wrapper>
     )}
-    {/* This Dummy div is to trigger the onEnd event */}
-    <Dummy onAnimationEnd={onEnd}></Dummy>
   </>);
 };
 
