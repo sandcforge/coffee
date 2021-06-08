@@ -1,39 +1,39 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import SearchIcon from '@material-ui/icons/Search';
 
-import { actionRequestUpdateRocketStatus } from '../redux/actions';
+import { actionLoadRocketStatus, actionRequestUpdateRocketStatus } from '../redux/actions';
 import { Rocket } from '../components/Rocket';
 
 export const Screen = (props) => {
   const { index: screenIndex } = props
   const dispatch = useDispatch();
-  const rocketIndex = 0;
   const rocketStatus = useSelector(state => state.rocket.status);
-  const rocketMessage = useSelector(state => state.rocket.message[rocketIndex]);
-  const requestUpdateRocketStatus = () => {
+  const rocketMessage = useSelector(state => state.rocket.message);
+  const requestUpdateRocketStatus = (index) => {
     dispatch(actionRequestUpdateRocketStatus({
-      index: rocketIndex,
+      index,
     }));
   };
 
-  useEffect(() => {
-    if (rocketStatus[rocketIndex] === screenIndex) {
-      console.log('start animation', rocketStatus[rocketIndex]);
-    }
-  }, [rocketStatus[rocketIndex]]);
-
-
   return (<>
-    <div
-      onClick={requestUpdateRocketStatus}
-    >homepage</div>
-    <div>{rocketStatus[rocketIndex]}</div>
-    <div>{rocketStatus[rocketIndex] === screenIndex ? 'start' : 'over'}</div>
     <Rocket
-      active={rocketStatus[rocketIndex] === screenIndex}
-      onEnd={requestUpdateRocketStatus}
-      message={rocketMessage} />
+      active={rocketStatus[0] === 0}
+      message={rocketMessage[0]}
+      onEnd={() => requestUpdateRocketStatus(0)}
+    />
+    <Rocket
+      active={rocketStatus[1] === 0}
+      message={rocketMessage[1]}
+      onEnd={() => requestUpdateRocketStatus(1)}
+    />
+    <Rocket
+      active={rocketStatus[2] === 0}
+      message={rocketMessage[2]}
+      onEnd={() => requestUpdateRocketStatus(2)}
+    />
   </>);
 };
 

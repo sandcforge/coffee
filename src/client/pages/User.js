@@ -19,7 +19,7 @@ export const User = () => {
 
 
   const onClickSubmitButton = () => {
-    dispatch(actionSubmitMessage(messageTextFieldValue));
+    dispatch(actionSubmitMessage({message:messageTextFieldValue}));
   };
 
   return (<>

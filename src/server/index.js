@@ -17,7 +17,7 @@ const rocketInit = {
   message:['','','','',''],
 }
 app.set('rocket',rocketInit);
-app.set('totalStatusNumber', 5);
+app.set('totalStatusNumber', 1);
 miscRoutes(app);
 httpServer.listen(process.env.PORT || 8080, () => {
   console.log(`Listening on port ${process.env.PORT || 8080}!`);
