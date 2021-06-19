@@ -1,12 +1,13 @@
+const compression = require('compression');
 const express = require('express');
 const http = require('http');
+const path = require('path');
 const { Server } = require("socket.io");
 
 const miscRoutes = require('./api.js');
 const { envConfig } = require('./constants.js');
 
 const app = express();
-app.use(express.static('dist'));
 app.use(express.json());
 
 const httpServer = http.createServer(app);
@@ -19,6 +20,14 @@ const rocketInit = {
 app.set('rocket',rocketInit);
 app.set('totalStatusNumber', 1);
 miscRoutes(app);
+
+const outputPath = path.resolve(process.cwd(), 'dist');
+app.use(compression());
+app.use('/', express.static(outputPath));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(outputPath, 'index.html'));
+});
+
 httpServer.listen(process.env.PORT || 8080, () => {
   console.log(`Listening on port ${process.env.PORT || 8080}!`);
   console.log(`NodeEnv: ${envConfig.nodeEnv}`);
