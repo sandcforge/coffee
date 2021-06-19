@@ -17,7 +17,7 @@ export const WebSocketProvider = ({ children }) => {
   }
 
   if (!socket) {
-    socket = io.connect(APP_CONST.WS_BASE);
+    socket = io.connect('/');
     socket.on("H2C", (msg) => {
       const payload = JSON.parse(msg);
       dispatch(actionLoadRocketStatus(payload));
