@@ -28,8 +28,8 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(outputPath, 'index.html'));
 });
 
-httpServer.listen(process.env.PORT || 8080, () => {
-  console.log(`Listening on port ${process.env.PORT || 8080}!`);
+httpServer.listen(envConfig.port, () => {
+  console.log(`Listening on port ${envConfig.port}!`);
   console.log(`NodeEnv: ${envConfig.nodeEnv}`);
 });
 
