@@ -8,12 +8,12 @@ const Rocket_ = (props) => {
     onEnd,   // The event at the end of animation
     color = 'red', // Rocket color
     iterations = 5,
-    fightDuration = 4, // The time of fight per iteration, unit: sec.
+    fightDuration = 10, // The time of fight per iteration, unit: sec.
   } = props;
 
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
-  const RocketContainerHeight = 50;
+  const RocketContainerHeight = 200;
   const RocketContainerWidth = 300;
   const ratio = windowWidth / (windowWidth + RocketContainerWidth);
   const slideIn = (i) => keyframes`
@@ -21,7 +21,10 @@ const Rocket_ = (props) => {
     100% { top: ${400 + i * 100}px; left: ${windowWidth}px;}`;
 
   const Wrapper = styled.div`
-    background-color: ${color};
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
     top: ${props => 300 + props.index * 100}px;
     left: ${-RocketContainerWidth}px;
     position: absolute;
@@ -34,6 +37,17 @@ const Rocket_ = (props) => {
     animation-delay: ${props => fightDuration * props.index * ratio}s;
  `;
 
+  const Plane = styled.img`
+    display: flex; 
+    width: 100%;
+    height: 100%;
+  `;
+  const Banner = styled.div`
+    color: ${color};
+    display: flex; 
+    font-size: 25px;
+  `;
+
   return active && (<>
     {Array.from(Array(iterations).keys()).map(i =>
       <Wrapper
@@ -41,7 +55,8 @@ const Rocket_ = (props) => {
         index={i}
         onAnimationEnd={i == iterations - 1 ? onEnd : undefined}
       >
-        {message}
+        <Banner>{message}</Banner>
+        <Plane src="https://i.pinimg.com/originals/5a/65/ee/5a65ee278cd557143f05a4ba91abbfa8.gif" />
       </Wrapper>
     )}
   </>);
