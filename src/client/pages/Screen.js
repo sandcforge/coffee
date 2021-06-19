@@ -20,11 +20,6 @@ export const Screen = (props) => {
 
   return (<>
     <Rocket
-      active={true}
-      message={'rocketMessage[0]'}
-      onEnd={undefined}
-    />
-    <Rocket
       active={rocketStatus[0] === 0}
       message={rocketMessage[0]}
       onEnd={() => requestUpdateRocketStatus(0)}
