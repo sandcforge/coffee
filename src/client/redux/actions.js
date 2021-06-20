@@ -16,6 +16,13 @@ const asyncActionHelper = (func) => {
     } catch (err) {
       thunkApi.dispatch(actionSetApiLoading(false));
       console.log(err);
+      switch (err.response.status) {
+        case 408:
+          console.log(err.response.status);
+          alert('请5秒钟后再发送。');
+          break;
+      }
+
       throw err;
     }
   };

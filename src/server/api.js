@@ -10,7 +10,7 @@ const miscRoutes = (app) => {
 
     // Ignore the reqest if still cooling down.
     if (cooldown) {
-      res.sendStatus(425);
+      res.sendStatus(408);
       return;
     }
 
