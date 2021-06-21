@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import SearchIcon from '@material-ui/icons/Search';
+import styled from 'styled-components';
 
-import { actionLoadRocketStatus, actionRequestUpdateRocketStatus } from '../redux/actions';
+import { actionRequestUpdateRocketStatus } from '../redux/actions';
 import { Rocket } from '../components/Rocket';
+
+const Wrapper = styled.div`
+  overflow: hidden;
+`;
 
 export const Screen = (props) => {
   const { index: screenIndex } = props
@@ -18,7 +21,7 @@ export const Screen = (props) => {
     }));
   };
 
-  return (<>
+  return (<Wrapper>
     <Rocket
       active={rocketStatus[0] === 0}
       message={rocketMessage[0]}
@@ -34,7 +37,7 @@ export const Screen = (props) => {
       message={rocketMessage[2]}
       onEnd={() => requestUpdateRocketStatus(2)}
     />
-  </>);
+  </Wrapper>);
 };
 
 Screen.propTypes = {
