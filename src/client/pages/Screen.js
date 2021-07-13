@@ -7,7 +7,7 @@ import { actionRequestUpdateRocketStatus } from '../redux/actions';
 import { Rocket } from '../components/Rocket';
 
 const Wrapper = styled.div`
-  overflow: hidden;
+  position: fixed;
 `;
 
 export const Screen = (props) => {
