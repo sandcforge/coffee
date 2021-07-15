@@ -2,7 +2,8 @@ import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const actionSetApiLoading = createAction('SetApiLoading');
-export const actionLoadRocketStatus = createAction('LoadRocketStatus');
+export const actionUpdateRocketStatus = createAction('UpdateRocketStatus');
+export const actionLaunchRocket = createAction('LaunchRocket');
 
 
 
@@ -27,14 +28,6 @@ const asyncActionHelper = (func) => {
     }
   };
 };
-
-export const actionRequestUpdateRocketStatus = createAsyncThunk(
-  'RequestUpdateRocketStatus',
-  asyncActionHelper(async (arg, thunkApi) => {
-    const result = await axios.post('/api/requpdate', arg);
-    return result.data;
-  })
-);
 
 export const actionSubmitMessage = createAsyncThunk(
   'SubmitMessage',

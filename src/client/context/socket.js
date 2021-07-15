@@ -2,7 +2,7 @@ import React, { createContext } from 'react';
 import io from 'socket.io-client';
 import { APP_CONST } from '../constants';
 import { useDispatch } from 'react-redux';
-import { actionLoadRocketStatus } from '../redux/actions';
+import { actionLaunchRocket } from '../redux/actions';
 
 export const WebSocketContext = createContext(null);
 
@@ -20,7 +20,7 @@ export const WebSocketProvider = ({ children }) => {
     socket = io.connect('/');
     socket.on("H2C", (msg) => {
       const payload = JSON.parse(msg);
-      dispatch(actionLoadRocketStatus(payload));
+      dispatch(actionLaunchRocket(payload.message));
     })
 
     ws = {
