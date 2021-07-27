@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { actionUpdateRocketStatus } from '../redux/actions';
 import { Rocket } from '../components/Rocket';
+import { Background } from '../components/Background';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -22,6 +23,7 @@ export const Screen = (props) => {
   };
 
   return (<Wrapper>
+    <Background/>
     <Rocket
       active={rocketStatus[0] === 0}
       message={rocketMessage[0]}
