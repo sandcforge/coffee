@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { Banner } from '../components/Banner';
+import rocket09 from '../../../public/rocket09.png';
 
 const Rocket_ = (props) => {
   const {
@@ -13,8 +15,8 @@ const Rocket_ = (props) => {
 
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
-  const PlaneImageWidth = 100;
-  const RocketContainerHeight = 100;
+  const PlaneImageWidth = 300;
+  const RocketContainerHeight = 300;
   const LowerHeightPerIteration = 200;
   const getRatio = w => windowWidth / (w + windowWidth);
   const slideIn = (props) => keyframes`
@@ -42,13 +44,6 @@ const Rocket_ = (props) => {
     display: flex; 
     width: ${PlaneImageWidth}px;
     height: ${RocketContainerHeight}px;
-  `;
-  const Banner = styled.div`
-    color: ${color};
-    display: flex;
-    white-space:pre-wrap;
-    flex-wrap: nowrap;
-    font-size: 25px;
   `;
 
   const DummyBanner = styled.div`
@@ -79,8 +74,8 @@ const Rocket_ = (props) => {
         index={i}
         onAnimationEnd={i == iterations - 1 ? onEnd : undefined}
       >
-        <Banner>{message}</Banner>
-        <Plane src="https://i.pinimg.com/originals/5a/65/ee/5a65ee278cd557143f05a4ba91abbfa8.gif" />
+        <Banner message={message}/>
+        <Plane src={rocket09} />
       </Wrapper>
     )}
   </>);
